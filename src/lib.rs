@@ -7,6 +7,13 @@ use tendril::TendrilSink;
 
 /// Consumes a string that contains HTML5 tags and spits out a Vec<String>
 /// containing the text content inside the tags in a pre-order manner.
+///
+/// Usage:
+/// ```
+/// let input = "<html>Hello World!</html>".to_owned();
+/// let output = strip_html_tags(input);
+/// assert_eq!(output, "Hello World!".to_owned()");
+/// ```
 pub fn strip_html_tags(input: String) -> Vec<String> {
     let dom = parse_document(RcDom::default(), ParseOpts::default())
         .from_utf8()
