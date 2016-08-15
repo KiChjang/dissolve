@@ -7,7 +7,7 @@ use tendril::TendrilSink;
 
 /// Consumes a string that contains HTML5 tags and spits out a Vec<String>
 /// containing the text content inside the tags in a pre-order manner.
-pub fn strip_html5_tags(input: String) -> Vec<String> {
+pub fn strip_html_tags(input: String) -> Vec<String> {
     let dom = parse_document(RcDom::default(), ParseOpts::default())
         .from_utf8()
         .one(input.as_bytes());
@@ -41,14 +41,21 @@ mod tests {
     #[test]
     fn test_strip_html_tag() {
         let input = "<html>Hello World!</html>".to_owned();
-        let output = strip_html5_tags(input);
+        let output = strip_html_tags(input);
         assert_eq!(output, vec!["Hello World!".to_owned()]);
     }
 
     #[test]
     fn test_strip_nested_tags() {
         let input = "<html>Hello<div>World!</div></html>".to_owned();
-        let output = strip_html5_tags(input);
+        let output = strip_html_tags(input);
         assert_eq!(output, vec!["Hello".to_owned(), "World!".to_owned()]);
+    }
+
+    #[test]
+    fn test_preorder_traversal() {
+        let input = "<html>Hel<div>lo</div>World!</html>".to_owned();
+        let output = strip_html_tags(input);
+        assert_eq!(output, vec!["Hel".to_owned(), "lo".to_owned(), "World!".to_owned()]);
     }
 }
