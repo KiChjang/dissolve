@@ -3,7 +3,7 @@ name = "dissolve"
 version = "0.1.0"
 description = "Melt away HTML tags and retrieve the text contents that you care about!"
 repository = "https://github.com/KiChjang/dissolve"
-keywords = ["html", "strip", "parse"]
+keywords = ["html", "tags", "strip", "parse"]
 license = "MIT"
 authors = ["Keith Yeung <kungfukeith11@gmail.com>"]
 
