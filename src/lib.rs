@@ -14,7 +14,7 @@ use tendril::TendrilSink;
 /// let output = strip_html_tags(input);
 /// assert_eq!(output, "Hello World!".to_owned()");
 /// ```
-pub fn strip_html_tags(input: String) -> Vec<String> {
+pub fn strip_html_tags(input: &str) -> Vec<String> {
     let dom = parse_document(RcDom::default(), ParseOpts::default())
         .from_utf8()
         .one(input.as_bytes());
@@ -47,21 +47,21 @@ mod tests {
     use super::*;
     #[test]
     fn test_strip_html_tag() {
-        let input = "<html>Hello World!</html>".to_owned();
+        let input = "<html>Hello World!</html>";
         let output = strip_html_tags(input);
         assert_eq!(output, vec!["Hello World!".to_owned()]);
     }
 
     #[test]
     fn test_strip_nested_tags() {
-        let input = "<html>Hello<div>World!</div></html>".to_owned();
+        let input = "<html>Hello<div>World!</div></html>";
         let output = strip_html_tags(input);
         assert_eq!(output, vec!["Hello".to_owned(), "World!".to_owned()]);
     }
 
     #[test]
     fn test_preorder_traversal() {
-        let input = "<html>Hel<div>lo</div>World!</html>".to_owned();
+        let input = "<html>Hel<div>lo</div>World!</html>";
         let output = strip_html_tags(input);
         assert_eq!(output, vec!["Hel".to_owned(), "lo".to_owned(), "World!".to_owned()]);
     }
