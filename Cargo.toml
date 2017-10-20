@@ -1,12 +1,12 @@
 [package]
 name = "dissolve"
-version = "0.1.3"
+version = "0.2.0"
 description = "Melt away HTML tags and retrieve the text contents that you care about!"
 repository = "https://github.com/KiChjang/dissolve"
-keywords = ["html", "tags", "strip", "parse"]
+keywords = ["html", "tags", "strip", "trim", "parse"]
 license = "MIT"
 authors = ["Keith Yeung <kungfukeith11@gmail.com>"]
 
 [dependencies]
-html5ever = "~0.5.4"
-tendril = "~0.2.2"
+html5ever = "~0.21.0"
+tendril = "~0.4.0"

@@ -2,10 +2,10 @@ extern crate html5ever;
 extern crate tendril;
 
 use html5ever::{ParseOpts, parse_document};
-use html5ever::rcdom::{RcDom, NodeEnum, Node};
+use html5ever::rcdom::{RcDom, Node, NodeData};
 use tendril::TendrilSink;
 
-/// Consumes a string that contains HTML5 tags and spits out a Vec<String>
+/// Consumes a string that contains HTML5 tags and outputs a Vec<String>
 /// containing the text content inside the tags in a pre-order manner.
 ///
 /// Usage:
@@ -18,24 +18,24 @@ pub fn strip_html_tags(input: &str) -> Vec<String> {
     let dom = parse_document(RcDom::default(), ParseOpts::default())
         .from_utf8()
         .one(input.as_bytes());
-    let ref doc = *dom.document.borrow();
-    get_text(doc)
+    let doc = dom.document;
+    get_text(&doc)
 }
 
 /// Helper function to return text in text nodes in pre-order traversal.
 fn get_text(element: &Node) -> Vec<String> {
-    match element.node {
-        NodeEnum::Text(ref s) => {
-            let mut text = vec!((&**s).to_owned());
-            for child in &element.children {
-                text.append(&mut get_text(&*child.borrow()));
+    match element.data {
+        NodeData::Text { ref contents } => {
+            let mut text = vec!((&**contents.borrow()).to_owned());
+            for child in &*element.children.borrow() {
+                text.append(&mut get_text(child));
             }
             text
         }
         _ => {
             let mut text = vec!();
-            for child in &element.children {
-                text.append(&mut get_text(&*child.borrow()));
+            for child in &*element.children.borrow() {
+                text.append(&mut get_text(child));
             }
             text
         }
