@@ -1,6 +1,6 @@
 [package]
 name = "dissolve"
-version = "0.2.1"
+version = "0.2.2"
 description = "Melt away HTML tags and retrieve the text contents that you care about!"
 repository = "https://github.com/KiChjang/dissolve"
 keywords = ["html", "tags", "strip", "trim", "parse"]
