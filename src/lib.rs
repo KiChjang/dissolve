@@ -11,7 +11,7 @@ use tendril::TendrilSink;
 /// Basic usage:
 ///
 /// ```rust
-/// let input = "<html>Hello World!</html>".to_owned();
+/// let input = "<html>Hello World!</html>";
 /// let output = strip_html_tags(input);
 /// assert_eq!(output, "Hello World!".to_owned());
 /// ```
