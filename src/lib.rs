@@ -9,7 +9,7 @@ use tendril::TendrilSink;
 /// containing the text content inside the tags in a pre-order manner.
 ///
 /// Usage:
-/// ```
+/// ```rust
 /// let input = "<html>Hello World!</html>".to_owned();
 /// let output = strip_html_tags(input);
 /// assert_eq!(output, "Hello World!".to_owned()");
