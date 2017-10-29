@@ -13,7 +13,7 @@ use tendril::TendrilSink;
 /// ```rust
 /// let input = "<html>Hello World!</html>";
 /// let output = strip_html_tags(input);
-/// assert_eq!(output, "Hello World!".to_owned());
+/// assert_eq!(output, vec!["Hello World!".to_owned()]);
 /// ```
 pub fn strip_html_tags(input: &str) -> Vec<String> {
     let dom = parse_document(RcDom::default(), ParseOpts::default())
