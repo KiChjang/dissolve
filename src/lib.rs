@@ -1,16 +1,31 @@
 extern crate html5ever;
 extern crate tendril;
 
+mod tables;
+
 use html5ever::{ParseOpts, parse_document};
 use html5ever::rcdom::{RcDom, Node, NodeData};
 use tendril::TendrilSink;
 
-/// Consumes a string that contains HTML5 tags and outputs a Vec<String>
+//! Dissolve, the solution one uses to melt away webs.
+//!
+//! The basic usage of dissolve is to retrieve texts from HTML text nodes
+//! via the strip_html_tags function.
+//! ```rust
+//! use dissolve::strip_html_tags;
+//!
+//! let input = "<html><body><div>Hello, this is the web!</div></body></html>";
+//! let output = strip_html_tags(input);
+//! assert_eq!(output, vec!["Hello, this is the web!".to_owned()]);
+//! ```
+
+/// Consumes a string that contains HTML tags and outputs a Vec<String>
 /// containing the text content inside the tags in a pre-order manner.
 ///
 /// Basic usage:
-///
 /// ```rust
+/// use dissolve::strip_html_tags;
+///
 /// let input = "<html>Hello World!</html>";
 /// let output = strip_html_tags(input);
 /// assert_eq!(output, vec!["Hello World!".to_owned()]);
