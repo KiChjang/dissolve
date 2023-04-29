@@ -6,6 +6,7 @@ repository = "https://github.com/KiChjang/dissolve"
 keywords = ["html", "tags", "strip", "trim", "parse"]
 license = "MIT"
 authors = ["Keith Yeung <kungfukeith11@gmail.com>"]
+edition = "2021"
 
 [dependencies]
 html5ever = "0.26.0"

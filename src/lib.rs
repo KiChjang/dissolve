@@ -1,6 +1,3 @@
-extern crate html5ever;
-extern crate markup5ever_rcdom;
-
 use html5ever::tendril::TendrilSink;
 use html5ever::{ParseOpts, parse_document};
 use markup5ever_rcdom::{RcDom, Node, NodeData};
@@ -11,7 +8,6 @@ use markup5ever_rcdom::{RcDom, Node, NodeData};
 /// Basic usage:
 ///
 /// ```rust
-/// # extern crate dissolve;
 /// # use dissolve::strip_html_tags;
 /// let input = "<html>Hello World!</html>";
 /// let output = strip_html_tags(input);
