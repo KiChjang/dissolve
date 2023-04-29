@@ -1,6 +1,6 @@
 use html5ever::tendril::TendrilSink;
-use html5ever::{ParseOpts, parse_document};
-use markup5ever_rcdom::{RcDom, Node, NodeData};
+use html5ever::{parse_document, ParseOpts};
+use markup5ever_rcdom::{Node, NodeData, RcDom};
 
 /// Consumes a string that contains HTML5 tags and outputs a Vec<String>
 /// containing the text content inside the tags in a pre-order manner.
@@ -25,14 +25,14 @@ pub fn strip_html_tags(input: &str) -> Vec<String> {
 fn get_text(element: &Node) -> Vec<String> {
     match element.data {
         NodeData::Text { ref contents } => {
-            let mut text = vec!((&**contents.borrow()).to_owned());
+            let mut text = vec![(&**contents.borrow()).to_owned()];
             for child in &*element.children.borrow() {
                 text.append(&mut get_text(child));
             }
             text
         }
         _ => {
-            let mut text = vec!();
+            let mut text = vec![];
             for child in &*element.children.borrow() {
                 text.append(&mut get_text(child));
             }
@@ -62,6 +62,9 @@ mod tests {
     fn test_preorder_traversal() {
         let input = "<html>Hel<div>lo</div>World!</html>";
         let output = strip_html_tags(input);
-        assert_eq!(output, vec!["Hel".to_owned(), "lo".to_owned(), "World!".to_owned()]);
+        assert_eq!(
+            output,
+            vec!["Hel".to_owned(), "lo".to_owned(), "World!".to_owned()]
+        );
     }
 }
