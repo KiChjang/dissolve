@@ -1,9 +1,9 @@
 extern crate html5ever;
-extern crate tendril;
+extern crate markup5ever_rcdom;
 
+use html5ever::tendril::TendrilSink;
 use html5ever::{ParseOpts, parse_document};
-use html5ever::rcdom::{RcDom, Node, NodeData};
-use tendril::TendrilSink;
+use markup5ever_rcdom::{RcDom, Node, NodeData};
 
 /// Consumes a string that contains HTML5 tags and outputs a Vec<String>
 /// containing the text content inside the tags in a pre-order manner.
@@ -11,6 +11,8 @@ use tendril::TendrilSink;
 /// Basic usage:
 ///
 /// ```rust
+/// # extern crate dissolve;
+/// # use dissolve::strip_html_tags;
 /// let input = "<html>Hello World!</html>";
 /// let output = strip_html_tags(input);
 /// assert_eq!(output, vec!["Hello World!".to_owned()]);

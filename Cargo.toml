@@ -8,5 +8,5 @@ license = "MIT"
 authors = ["Keith Yeung <kungfukeith11@gmail.com>"]
 
 [dependencies]
-html5ever = "~0.21.0"
-tendril = "~0.4.0"
+html5ever = "0.26.0"
+markup5ever_rcdom = "0.2.0"
