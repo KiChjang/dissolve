@@ -18,26 +18,18 @@ pub fn strip_html_tags(input: &str) -> Vec<String> {
         .from_utf8()
         .one(input.as_bytes());
     let doc = dom.document;
-    get_text(&doc)
+    let mut texts = Vec::new();
+    push_texts(&doc, &mut texts);
+    texts
 }
 
 /// Helper function to return text in text nodes in pre-order traversal.
-fn get_text(element: &Node) -> Vec<String> {
-    match element.data {
-        NodeData::Text { ref contents } => {
-            let mut text = vec![(&**contents.borrow()).to_owned()];
-            for child in &*element.children.borrow() {
-                text.append(&mut get_text(child));
-            }
-            text
-        }
-        _ => {
-            let mut text = vec![];
-            for child in &*element.children.borrow() {
-                text.append(&mut get_text(child));
-            }
-            text
-        }
+fn push_texts(element: &Node, texts: &mut Vec<String>) {
+    if let NodeData::Text { contents } = &element.data {
+        texts.push((**contents.borrow()).to_owned());
+    }
+    for child in &*element.children.borrow() {
+        push_texts(child, texts);
     }
 }
 
