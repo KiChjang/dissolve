@@ -14,9 +14,7 @@ use markup5ever_rcdom::{Node, NodeData, RcDom};
 /// assert_eq!(output, vec!["Hello World!".to_owned()]);
 /// ```
 pub fn strip_html_tags(input: &str) -> Vec<String> {
-    let dom = parse_document(RcDom::default(), ParseOpts::default())
-        .from_utf8()
-        .one(input.as_bytes());
+    let dom = parse_document(RcDom::default(), ParseOpts::default()).one(input);
     let doc = dom.document;
     let mut texts = Vec::new();
     push_texts(&doc, &mut texts);
